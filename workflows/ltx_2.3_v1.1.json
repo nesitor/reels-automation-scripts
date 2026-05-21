@@ -1,0 +1,569 @@
+{
+  "1241": {
+    "inputs": {
+      "frame_rate": [
+        "4989",
+        0
+      ],
+      "positive": [
+        "2483",
+        0
+      ],
+      "negative": [
+        "2612",
+        0
+      ]
+    },
+    "class_type": "LTXVConditioning",
+    "_meta": {
+      "title": "LTXVConditioning"
+    }
+  },
+  "2004": {
+    "inputs": {
+      "image": "clip 4.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Cargar Imagen"
+    }
+  },
+  "2483": {
+    "inputs": {
+      "text": "Cinematic vertical portrait, shallow depth of field f/1.8, 35mm film grain,\nphotoreal naturalistic look.\n\nSubject: Same Spanish woman in her late 20s with long copper-red wavy hair,\nvivid emerald-green eyes, fair freckled porcelain skin, hourglass figure\nwith generous bust, wearing the fitted cream ribbed-knit top with deep\nV-neckline showing tasteful cleavage and cream cardigan off the shoulders.\nShe is leaning forward on a warm-toned wooden kitchen counter, forearms\nresting on it.\n\nAction: She looks directly into the camera and leans in just a fraction\nmore as she speaks, one eyebrow lifting in a sincere, slightly challenging\nquestion, lips perfectly synced. She finishes with the smallest tilt of her\nhead, inviting the viewer to actually answer.\n\nSpoken dialogue (Spanish, female voice, intimate and warm tone, unhurried\npacing, soft natural delivery, close-mic intimate ASMR-like recording\nquality, studio clean, no reverb): \"¿No te parece un problema enorme?\"\n\nAmbient sound design: gentle warm room tone, a single soft sustained piano\nchord underneath her voice, fading naturally. No music bed, no drums, no\nmelody.\n\nCinematography: warm morning side light from a kitchen window. The kitchen\nblurs softly behind her in bokeh. The camera holds steady with the gentlest\nhand-held micro-movement. Honey-gold and amber palette, naturalistic skin\nand freckles, clean unmarked frame, no graphics or text anywhere on screen.",
+      "clip": [
+        "4994",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "2612": {
+    "inputs": {
+      "text": "text, subtitles, captions, closed captions, burned-in subtitles, on-screen text, \nlower thirds, caption bar, karaoke captions, social media captions, TikTok caption, \nInstagram Reels caption, YouTube Shorts caption, typography, letters, words, \nwriting on screen, title card, watermark, logo, URL on screen, website address \non screen, banner, sticker, emoji, timecode, UI overlay, graphic overlay,\nblurry, low quality, distorted face, deformed hands, extra fingers, identity shift, \nplastic skin, waxy skin, cartoon, anime, 3d render, cgi, oversaturated, \noverexposed, jittery motion, jump cuts, glitches, duplicate person, multiple women,\ncamera shake, handheld, fast motion, slow motion,\nbackground music, soundtrack, music bed, melody, singing, lyrics, autotune, \nrobotic voice, reverb-heavy audio, distorted audio, clipping, hiss, \ncrowd noise, sirens, dogs barking,\nnudity, revealing clothing, cleavage focus, suggestive framing",
+      "clip": [
+        "4994",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "3059": {
+    "inputs": {
+      "width": 736,
+      "height": 1280,
+      "length": [
+        "4988",
+        0
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLTXVLatentVideo",
+    "_meta": {
+      "title": "EmptyLTXVLatentVideo"
+    }
+  },
+  "3159": {
+    "inputs": {
+      "strength": 0.7,
+      "bypass": [
+        "4987",
+        0
+      ],
+      "vae": [
+        "4992",
+        0
+      ],
+      "image": [
+        "3336",
+        0
+      ],
+      "latent": [
+        "3059",
+        0
+      ]
+    },
+    "class_type": "LTXVImgToVideoConditionOnly",
+    "_meta": {
+      "title": "🅛🅣🅧 LTXV Img To Video Condition Only"
+    }
+  },
+  "3336": {
+    "inputs": {
+      "img_compression": 18,
+      "image": [
+        "4990",
+        0
+      ]
+    },
+    "class_type": "LTXVPreprocess",
+    "_meta": {
+      "title": "LTXVPreprocesar"
+    }
+  },
+  "3980": {
+    "inputs": {
+      "frames_number": [
+        "4988",
+        0
+      ],
+      "frame_rate": [
+        "4983",
+        0
+      ],
+      "batch_size": 1,
+      "audio_vae": [
+        "4991",
+        0
+      ]
+    },
+    "class_type": "LTXVEmptyLatentAudio",
+    "_meta": {
+      "title": "LTXV Audio Latente Vacío"
+    }
+  },
+  "4528": {
+    "inputs": {
+      "video_latent": [
+        "3159",
+        0
+      ],
+      "audio_latent": [
+        "3980",
+        0
+      ]
+    },
+    "class_type": "LTXVConcatAVLatent",
+    "_meta": {
+      "title": "LTXVConcatAVLatent"
+    }
+  },
+  "4828": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "4922",
+        0
+      ],
+      "positive": [
+        "1241",
+        0
+      ],
+      "negative": [
+        "1241",
+        1
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "GuíaCFG"
+    }
+  },
+  "4829": {
+    "inputs": {
+      "noise": [
+        "4832",
+        0
+      ],
+      "guider": [
+        "4828",
+        0
+      ],
+      "sampler": [
+        "4831",
+        0
+      ],
+      "sigmas": [
+        "4984",
+        0
+      ],
+      "latent_image": [
+        "4528",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "4831": {
+    "inputs": {
+      "sampler_name": "euler_ancestral_cfg_pp"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "4832": {
+    "inputs": {
+      "noise_seed": 43
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "Ruido aleatorio"
+    }
+  },
+  "4845": {
+    "inputs": {
+      "av_latent": [
+        "4829",
+        0
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "LTXVSeparateAVLatent"
+    }
+  },
+  "4848": {
+    "inputs": {
+      "samples": [
+        "4973",
+        1
+      ],
+      "audio_vae": [
+        "4991",
+        0
+      ]
+    },
+    "class_type": "LTXVAudioVAEDecode",
+    "_meta": {
+      "title": "Decodificar LTXV Audio VAE"
+    }
+  },
+  "4851": {
+    "inputs": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 512,
+      "temporal_overlap": 4,
+      "samples": [
+        "4973",
+        0
+      ],
+      "vae": [
+        "4992",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeTiled",
+    "_meta": {
+      "title": "VAE Decodificar (Mosaico)"
+    }
+  },
+  "4922": {
+    "inputs": {
+      "lora_name": "ltx-2.3-22b-distilled-lora-384.safetensors",
+      "strength_model": 0.5,
+      "model": [
+        "4993",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "CargadorLoRAModeloSolo"
+    }
+  },
+  "4964": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "4922",
+        0
+      ],
+      "positive": [
+        "1241",
+        0
+      ],
+      "negative": [
+        "1241",
+        1
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "GuíaCFG"
+    }
+  },
+  "4967": {
+    "inputs": {
+      "noise_seed": 42
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "Ruido aleatorio"
+    }
+  },
+  "4969": {
+    "inputs": {
+      "video_latent": [
+        "4970",
+        0
+      ],
+      "audio_latent": [
+        "4845",
+        1
+      ]
+    },
+    "class_type": "LTXVConcatAVLatent",
+    "_meta": {
+      "title": "LTXVConcatAVLatent"
+    }
+  },
+  "4970": {
+    "inputs": {
+      "strength": 1,
+      "bypass": [
+        "4987",
+        0
+      ],
+      "vae": [
+        "4992",
+        0
+      ],
+      "image": [
+        "4990",
+        0
+      ],
+      "latent": [
+        "4975",
+        0
+      ]
+    },
+    "class_type": "LTXVImgToVideoConditionOnly",
+    "_meta": {
+      "title": "🅛🅣🅧 LTXV Img To Video Condition Only"
+    }
+  },
+  "4971": {
+    "inputs": {
+      "noise": [
+        "4967",
+        0
+      ],
+      "guider": [
+        "4964",
+        0
+      ],
+      "sampler": [
+        "4976",
+        0
+      ],
+      "sigmas": [
+        "4985",
+        0
+      ],
+      "latent_image": [
+        "4969",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "4973": {
+    "inputs": {
+      "av_latent": [
+        "4971",
+        0
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "LTXVSeparateAVLatent"
+    }
+  },
+  "4974": {
+    "inputs": {
+      "model_name": "ltx-2.3-spatial-upscaler-x2-1.1.safetensors"
+    },
+    "class_type": "LatentUpscaleModelLoader",
+    "_meta": {
+      "title": "Cargar modelo de escalado Latent"
+    }
+  },
+  "4975": {
+    "inputs": {
+      "samples": [
+        "4845",
+        0
+      ],
+      "upscale_model": [
+        "4974",
+        0
+      ],
+      "vae": [
+        "4992",
+        0
+      ]
+    },
+    "class_type": "LTXVLatentUpsampler",
+    "_meta": {
+      "title": "LTXVLatentUpsampler"
+    }
+  },
+  "4976": {
+    "inputs": {
+      "sampler_name": "euler_cfg_pp"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "4983": {
+    "inputs": {
+      "a": [
+        "4989",
+        0
+      ]
+    },
+    "class_type": "CM_FloatToInt",
+    "_meta": {
+      "title": "FloatToInt"
+    }
+  },
+  "4984": {
+    "inputs": {
+      "sigmas": "1.0, 0.99375, 0.9875, 0.98125, 0.975, 0.909375, 0.725, 0.421875, 0.0"
+    },
+    "class_type": "ManualSigmas",
+    "_meta": {
+      "title": "ManualSigmas"
+    }
+  },
+  "4985": {
+    "inputs": {
+      "sigmas": "0.85, 0.7250, 0.4219, 0.0"
+    },
+    "class_type": "ManualSigmas",
+    "_meta": {
+      "title": "ManualSigmas"
+    }
+  },
+  "4987": {
+    "inputs": {
+      "value": false
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "bypass_i2v"
+    }
+  },
+  "4988": {
+    "inputs": {
+      "value": 121
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "number of frames"
+    }
+  },
+  "4989": {
+    "inputs": {
+      "value": 24
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "fps"
+    }
+  },
+  "4990": {
+    "inputs": {
+      "resize_type": "scale longer dimension",
+      "resize_type.longer_size": 1536,
+      "scale_method": "lanczos",
+      "input": [
+        "2004",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "Redimensionar Imagen/Máscara"
+    }
+  },
+  "4991": {
+    "inputs": {
+      "vae_name": "LTX23_audio_vae_bf16.safetensors",
+      "device": "main_device",
+      "weight_dtype": "bf16"
+    },
+    "class_type": "VAELoaderKJ",
+    "_meta": {
+      "title": "VAELoader KJ"
+    }
+  },
+  "4992": {
+    "inputs": {
+      "vae_name": "LTX23_video_vae_bf16.safetensors",
+      "device": "main_device",
+      "weight_dtype": "bf16"
+    },
+    "class_type": "VAELoaderKJ",
+    "_meta": {
+      "title": "VAELoader KJ"
+    }
+  },
+  "4993": {
+    "inputs": {
+      "unet_name": "ltx-2.3-22b-distilled-1.1-Q3_K_M.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "4994": {
+    "inputs": {
+      "clip_name1": "gemma_3_12B_it_fp4_mixed.safetensors",
+      "clip_name2": "ltx-2.3_text_projection_bf16.safetensors",
+      "type": "ltxv",
+      "device": "default"
+    },
+    "class_type": "DualCLIPLoader",
+    "_meta": {
+      "title": "DualCLIPLoader"
+    }
+  },
+  "4995": {
+    "inputs": {
+      "frame_rate": [
+        "4989",
+        0
+      ],
+      "loop_count": 0,
+      "filename_prefix": "LTX-2.3\\ComfyUI-2026-05-19",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 19,
+      "save_metadata": true,
+      "trim_to_audio": false,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "4851",
+        0
+      ],
+      "audio": [
+        "4848",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine 🎥🅥🅗🅢"
+    }
+  }
+}

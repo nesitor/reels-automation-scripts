@@ -1,0 +1,12 @@
+{
+  "_help_1": "Map logical names → node IDs in your exported workflow. Run `python scripts/inspect_workflow.py workflows/ltx_2.3_v1.1.json` to list every node and its inputs.",
+  "_help_2": "Two formats per logical name are supported: shorthand (just the node id string) uses a default input key per logical name; explicit form lets you specify a custom input key.",
+  "_help_3": "Defaults: prompt_positive→text, prompt_negative→text, input_image→image, seed→seed, output_filename→filename_prefix. Override the input key if your workflow uses something else (e.g. KSampler's `noise_seed`).",
+  "_help_4": "prompt_negative is OPTIONAL. Remove it from this file if you want your workflow's hard-coded negative to win.",
+
+  "prompt_positive": "6",
+  "prompt_negative": "7",
+  "input_image":     "12",
+  "seed":            { "node_id": "25", "input": "noise_seed" },
+  "output_filename": { "node_id": "37", "input": "filename_prefix" }
+}

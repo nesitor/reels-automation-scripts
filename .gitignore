@@ -1,0 +1,32 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+
+# Runtime artefacts
+db/state.db*
+guion/
+!guion/.gitkeep
+outputs/
+!outputs/.gitkeep
+imported_assets/
+images/
+!imported_assets/.gitkeep
+workflows/node_map.json
+
+# Logs and PIDs from background daemons
+*.log
+*.pid
+
+# Outputs of one-off helpers
+test_proxy.png
+
+# Editor cruft
+.DS_Store
+.vscode/
+.idea/
