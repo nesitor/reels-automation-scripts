@@ -1,4 +1,4 @@
-# CLAUDE.md — Aspectados Reels Automation
+# CLAUDE.md — AI Reels Pipeline
 
 Context for AI coding agents (and humans) operating inside this folder. Read
 this first before changing anything. Cross-reference [SCRIPTS.md](SCRIPTS.md)
@@ -8,7 +8,7 @@ for command-line usage examples.
 
 ## What this folder does
 
-End-to-end automation for AI-generated vertical reels for Aspectados:
+End-to-end automation for AI-generated vertical reels:
 
 ```
 guion JSON  →  Nano Banana 2 (protagonist + per-clip first frames)
@@ -351,7 +351,7 @@ commands for existing DBs.
 
 - `scripts/adopt_assets.py::_CLIP_RE = r"clip[\s_\-]*(\d+)"`. Matches names
   like `clip 4.png` (with space), `clip_01.png`, `clip-3.mp4`,
-  `Aspectados_clip07_v2.png`. The first version forgot whitespace.
+  `MyVideo_clip07_v2.png`. The first version forgot whitespace.
 
 - `lib/comfyui_client.py::collect_video_path` was renamed to
   `find_output_in_history` + separate `download_output()` when we moved from
@@ -370,7 +370,7 @@ commands for existing DBs.
 
 ```bash
 # 1. clone, cd in
-cd aspectados-reels-automation/
+cd ai-reels-pipeline/
 
 # 2. venv + deps
 python3 -m venv venv && source venv/bin/activate

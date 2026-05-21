@@ -11,9 +11,9 @@ te lleva **~3 minutos** y es gratuito.
 1. En Telegram, busca **@BotFather** y abre el chat.
 2. Manda `/newbot`.
 3. BotFather te pide un nombre legible (puede tener espacios): por ejemplo
-   `Aspectados Reels Notifier`.
+   `AI Reels Notifier`.
 4. Luego te pide un **username** que tiene que acabar en `bot`: por ejemplo
-   `aspectados_reels_bot`. Tiene que ser único en todo Telegram, prueba
+   `ai_reels_pipeline_bot`. Tiene que ser único en todo Telegram, prueba
    variantes si te lo rechaza.
 5. BotFather te devuelve un mensaje con el **token**, algo así:
    ```
@@ -35,7 +35,7 @@ te lleva **~3 minutos** y es gratuito.
 El bot necesita saber **a qué chat** mandarte los mensajes. Lo más sencillo es
 que sea tu propio chat privado con el bot:
 
-1. Busca el username del bot que creaste (`@aspectados_reels_bot`) en Telegram.
+1. Busca el username del bot que creaste (`@ai_reels_pipeline_bot`) en Telegram.
 2. Pulsa **Start** (o manda cualquier mensaje, p. ej. "hola").
 3. Abre en tu navegador esta URL, sustituyendo `<TOKEN>` por tu token:
    ```

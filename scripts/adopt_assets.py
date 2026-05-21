@@ -16,7 +16,7 @@ File-name convention:
   Each filename must contain the substring `clip` followed by a number that
   matches `clip_order` in the DB. The match is case-insensitive and tolerates
   underscores or hyphens between `clip` and the number. Examples that work:
-    clip_01.png    clip-3.mp4    Aspectados_clip07_final_v2.png
+    clip_01.png    clip-3.mp4    MyVideo_clip07_final_v2.png
   Files that don't match the pattern are skipped (with a log line).
 
 Usage:

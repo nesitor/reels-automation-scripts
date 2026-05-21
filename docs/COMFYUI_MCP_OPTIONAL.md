@@ -42,7 +42,7 @@ Añade a tu `~/.claude/settings.json` (o al `settings.json` del proyecto):
       "env": {
         "COMFY_HOST": "127.0.0.1",
         "COMFY_PORT": "8188",
-        "COMFY_WORKFLOWS_DIR": "/Users/andresdiazmolins/code/ai/aspectados/automation/workflows"
+        "COMFY_WORKFLOWS_DIR": "/path/to/ai-reels-pipeline/workflows"
       }
     }
   }

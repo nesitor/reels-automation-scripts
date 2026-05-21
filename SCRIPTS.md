@@ -353,7 +353,7 @@ The original external file is left untouched.
 
 Filename detection: each file must contain `clip` + a number (case-insensitive,
 optional whitespace/underscore/hyphen separator).
-Examples that match: `clip_01.png`, `clip 4.png`, `Aspectados_clip07_v2.png`.
+Examples that match: `clip_01.png`, `clip 4.png`, `MyVideo_clip07_v2.png`.
 
 | Flag | Type | Default | Description |
 |---|---|---|---|
@@ -369,7 +369,7 @@ Examples that match: `clip_01.png`, `clip 4.png`, `Aspectados_clip07_v2.png`.
 ```bash
 # Adopt raw images from an external location
 python scripts/adopt_assets.py --run-id 2 \
-       --images-raw /Users/andres/Downloads/old_images/
+       --images-raw ~/Downloads/old_images/
 
 # Adopt all three directories under the run's output_dir
 python scripts/adopt_assets.py --run-id 2 --auto

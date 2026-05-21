@@ -78,7 +78,7 @@ def load() -> Config:
         google_ai_extra_headers=_json_dict("GOOGLE_AI_EXTRA_HEADERS"),
         gemini_image_model=os.getenv("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image-preview"),
         comfyui_host=os.getenv("COMFYUI_HOST", "http://127.0.0.1:8188").rstrip("/"),
-        comfyui_client_id=os.getenv("COMFYUI_CLIENT_ID", "aspectados-reels-automation"),
+        comfyui_client_id=os.getenv("COMFYUI_CLIENT_ID", "ai-reels-pipeline"),
         telegram_bot_token=os.getenv("TELEGRAM_BOT_TOKEN", ""),
         telegram_chat_id=os.getenv("TELEGRAM_CHAT_ID", ""),
         telegram_enabled=_bool("TELEGRAM_ENABLED", True),

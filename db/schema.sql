@@ -1,5 +1,5 @@
 -- ============================================================================
--- Aspectados Reels Automation — SQLite state schema
+-- AI Reels Pipeline — SQLite state schema
 --
 -- This DB is the single source of truth for pipeline state. All scripts are
 -- idempotent against this state: re-running any stage skips what is already
