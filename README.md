@@ -1,4 +1,4 @@
-# Aspectados Reels — Automation pipeline
+# Reels — Automation pipeline
 
 Automation que toma un guion de 16 clips, genera la imagen base de la
 protagonista en **Nano Banana 2** (Gemini Image — vía Google AI Studio,
@@ -18,113 +18,7 @@ script se puede reanudar tras Ctrl+C, kernel panic, corte de luz, lo que sea.
 
 ---
 
-## Qué hay en esta carpeta
-
-```
-automation/
-├── pipeline.py                Orquestador (chains stages 2→6)
-├── requirements.txt           Deps Python
-├── .env.example               Plantilla de credenciales (copiar a .env)
-├── db/
-│   └── schema.sql             Tablas SQLite (idempotente)
-├── lib/                       Módulos compartidos (no se ejecutan directos)
-│   ├── config.py · db.py · logger.py
-│   ├── telegram.py · image_utils.py
-│   ├── nano_banana.py         Google GenAI wrapper (con soporte de proxy)
-│   └── comfyui_client.py      Cliente HTTP-only para ComfyUI
-├── scripts/                   Stages + utilidades
-│   ├── init_db.py · import_guion.py
-│   ├── stage1_protagonist.py · stage2_scene_images.py
-│   ├── stage3_crop_watermark.py · stage4_queue_videos.py
-│   ├── stage5_poll_videos.py · stage6_compile.py
-│   ├── status.py · adopt_assets.py · redo_clips.py
-│   ├── inspect_workflow.py · test_proxy_image.py
-├── workflows/
-│   ├── ltx_2.3_v1.1.json      Workflow ComfyUI exportado en API format
-│   ├── node_map.json          Mapeo de IDs (instalación-específico)
-│   └── node_map.example.json  Plantilla documentada
-├── guion/
-│   └── video<N>.v<M>.json     Guiones versionados (uno por vídeo)
-└── outputs/                   Artefactos generados (gitignored)
-    └── <video_id>/v<N>_<profile>/
-        ├── images/            Frames raw de Nano Banana
-        ├── images_cropped/    Frames sin watermark
-        └── videos/            MP4s descargados de ComfyUI
-```
-
----
-
-## Migrar a un repo nuevo (checklist)
-
-Cuando muevas esta carpeta a su propio repo:
-
-```bash
-# 1. Copia la carpeta a tu nueva ubicación
-cp -r /Users/andresdiazmolins/code/ai/aspectados/automation/ ~/code/aspectados-reels/
-cd ~/code/aspectados-reels
-
-# 2. Inicializa git
-git init && git add . && git commit -m "Initial commit"
-
-# 3. (Opcional) decide qué arrastrar del estado actual:
-#    - db/state.db*       → estado actual de tus runs (mantener si quieres continuar)
-#    - images/video_2/    → carpeta manual con tus PNGs (ya cubierta por outputs/)
-#    - outputs/           → artefactos ya generados (ya está gitignored)
-#    - stage5.log         → log local del poller (ya está gitignored)
-```
-
-### En el repo nuevo, primera vez
-
-```bash
-# 4. Venv + deps
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# 5. Credenciales (NO commitees .env)
-cp .env.example .env
-$EDITOR .env
-
-# 6. DB
-python scripts/init_db.py
-
-# 7. ComfyUI workflow
-#    Exporta desde ComfyUI: Settings → Enable Dev mode → "Save (API Format)"
-#    Pon el JSON en workflows/ltx_2.3_v1.1.json
-python scripts/inspect_workflow.py workflows/ltx_2.3_v1.1.json
-cp workflows/node_map.example.json workflows/node_map.json
-$EDITOR workflows/node_map.json   # rellena los IDs reales
-
-# 8. Smoke tests
-python -c "from lib import comfyui_client; print('comfyui reachable:', comfyui_client.ping())"
-python scripts/test_proxy_image.py "test"
-
-# 9. Listo. A producir vídeos:
-python scripts/import_guion.py guion/video2.v1.json --profile preview
-```
-
-### Qué se exporta y qué no
-
-| Categoría | En git | Por qué |
-|---|---|---|
-| Todo `lib/`, `scripts/`, `pipeline.py` | ✅ | Código fuente |
-| `db/schema.sql` | ✅ | Definición del estado |
-| `guion/*.json` | ✅ | Los guiones son el contrato creativo del proyecto |
-| `workflows/ltx_2.3_v1.1.json` | ✅ | Tu workflow real importa para reproducibilidad |
-| `workflows/node_map.json` | ✅ | Las IDs son específicas de tu workflow |
-| `.env.example` | ✅ | Plantilla pública |
-| `.env` | ❌ (gitignored) | Credenciales reales |
-| `db/state.db*` | ❌ (gitignored) | Estado en runtime, no semántico |
-| `outputs/` | ❌ (gitignored excepto `.gitkeep`) | Binarios pesados, regenerables |
-| `*.log`, `*.pid`, `test_proxy.png` | ❌ (gitignored) | Cruft de ejecución |
-| `images/` (carpeta manual) | depende | Si la usas como source-of-truth de tus imágenes externas, sí; si es un staging temporal, no |
-
----
-
 ## Setup (una sola vez)
-
-> Si ya seguiste la sección "Migrar a un repo nuevo" arriba, esto es lo mismo
-> resumido. Si no, empieza aquí.
 
 ```bash
 cd automation
@@ -237,7 +131,7 @@ Tres formas de saltar trabajo ya hecho:
 `adopt_assets.py` registra archivos existentes como `done` para que los stages
 siguientes los salten. La convención de nombres es flexible: el script busca
 `clip` + número en cualquier parte del nombre (p. ej. `clip_01.png`,
-`clip-3.mp4`, `Aspectados_clip07_v2.png`).
+`clip-3.mp4`, `Clip07_v2.png`).
 
 ```bash
 # Importa el guion primero para tener un run_id
@@ -246,15 +140,15 @@ python scripts/import_guion.py guion/video2.v1.json --profile preview
 
 # Adopta imágenes ya generadas en otra sesión (todavía sin watermark cropping)
 python scripts/adopt_assets.py --run-id 2 \
-       --images-raw /Users/andres/old-images/video2/
+       --images-raw /Users/user/old-images/video2/
 
 # O imágenes ya recortadas (saltan el stage 3 también)
 python scripts/adopt_assets.py --run-id 2 \
-       --images-cropped /Users/andres/old-images-cropped/
+       --images-cropped /Users/user/old-images-cropped/
 
 # Adopta los 2-3 clips MP4 que ya tienes renderizados
 python scripts/adopt_assets.py --run-id 2 \
-       --videos /Users/andres/old-mp4s/
+       --videos /Users/user/old-mp4s/
 
 # Si los pones bajo outputs/<video>/v1_preview/{images,images_cropped,videos}/
 # usa --auto y los pilla todos:
